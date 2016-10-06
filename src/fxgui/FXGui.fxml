@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxgui.FxGuiController">
+   <children>
+      <AnchorPane fx:id="detatailsPane" layoutX="500.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="300.0" style="-fx-background-color: #12f3b9;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="cover" fitHeight="250.0" fitWidth="250.0" layoutX="25.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="50.0">
+               <image>
+                  <Image url="@../../res/imgs/Musixmatch_logo_icon_only.svg.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="108.0" layoutY="36.0" text="Song Metadata:" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="15.0" />
+            <TextField fx:id="title" layoutX="76.0" layoutY="365.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="15.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="365.0" prefHeight="25.0" prefWidth="51.0" text="Titolo:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <Label alignment="CENTER" layoutX="15.0" layoutY="399.0" prefHeight="25.0" prefWidth="51.0" text="Artist:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <VBox layoutX="15.0" layoutY="314.0" prefHeight="25.0" prefWidth="300.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+               <children>
+                  <Label prefHeight="25.0" prefWidth="51.0" text="Titolo:" />
+                  <TextField fx:id="fileName" editable="false" prefHeight="25.0" prefWidth="210.0" />
+               </children>
+            </VBox>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="468.0" prefHeight="25.0" prefWidth="51.0" text="Art. Alb:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="434.0" prefHeight="25.0" prefWidth="51.0" text="Album:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <TextField fx:id="album" layoutX="75.0" layoutY="434.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="15.0" />
+            <MenuBar layoutX="2.0" layoutY="704.0" style="-fx-background-color: #00CC99;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="503.0" prefHeight="25.0" prefWidth="51.0" text="Track:" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <Label alignment="CENTER" layoutX="78.0" layoutY="503.0" prefHeight="25.0" prefWidth="72.0" text="Date:" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="150.0" />
+            <Label alignment="CENTER" layoutX="182.0" layoutY="503.0" prefHeight="25.0" prefWidth="103.0" text="Genere:" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="15.0" />
+            <TextField fx:id="track" layoutX="15.0" layoutY="528.0" prefHeight="25.0" prefWidth="51.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="234.0" />
+            <TextField fx:id="year" layoutX="75.0" layoutY="528.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="150.0" />
+            <ComboBox fx:id="genere" layoutX="160.0" layoutY="528.0" prefWidth="150.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="15.0" />
+            <TextField fx:id="artist" layoutX="76.0" layoutY="399.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="15.0" />
+            <TextField fx:id="author" layoutX="76.0" layoutY="468.0" prefHeight="25.0" prefWidth="210.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="15.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="tablePane" layoutX="8.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #ff43fe;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="0.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="730.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="fileColumn" prefWidth="145.0" resizable="false" text="File" />
+                <TableColumn fx:id="titleColumn" prefWidth="145.0" resizable="false" text="Title" />
+                  <TableColumn fx:id="albumColumn" prefWidth="145.0" resizable="false" text="Album" />
+                  <TableColumn fx:id="authorColumn" minWidth="-1.0" prefWidth="145.0" resizable="false" text="Artist" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

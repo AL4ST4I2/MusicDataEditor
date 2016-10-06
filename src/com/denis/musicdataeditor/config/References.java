@@ -8,7 +8,9 @@ import com.mpatric.mp3agic.ID3v1Genres;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class References {
@@ -135,7 +137,7 @@ public class References {
 
     public static String[] normalizeTrackGenres(MXMTrack track)
     {
-        String[] unk = new String[] {"unknown"};
+        String[] unk = new String[] {"Unknown"};
         if (track.getGenres().size() ==  0) return unk;
         String[] rit = new String[track.getGenres().size()];
         for (int i = 0; i < rit.length; i++) {

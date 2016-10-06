@@ -5,6 +5,8 @@ import com.denis.musicdataeditor.core.Canzone;
 import com.denis.musicdataeditor.image.CoverArt;
 import com.denis.musicdataeditor.mxmwrapper.MXM;
 import com.denis.musicdataeditor.mxmwrapper.MXMTrack;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.ID3v23Tag;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -330,15 +332,22 @@ public class MXMDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_b_nextActionPerformed
 
     private void b_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_saveActionPerformed
-        song.setTITOLO(References.toTitleCase(t_titolo.getText()));
-        song.setARTISTA(References.toTitleCase(t_artista.getText()));
-        song.setAUTORE(References.toTitleCase(t_artista.getText()));
-        song.setALBUM(References.toTitleCase(t_album.getText()));
-        song.setANNO(References.toTitleCase(t_anno.getText()));
-        song.setNUMERO(References.toTitleCase(t_numero.getText()));
-        song.setGENERE((String)cb_genere.getSelectedItem());
-        song.setCOVER(CoverArt.urlImageToByteArray(tracks.get(pos).getCoverart350x350()), "jpg");
+        ID3v2 tags = new ID3v23Tag();
+        tags.setTitle(References.toTitleCase(t_titolo.getText()));
+        tags.setArtist(References.toTitleCase(t_artista.getText()));
+        tags.setAlbumArtist(References.toTitleCase(t_artista.getText()));
+        tags.setAlbum(References.toTitleCase(t_album.getText()));
+        tags.setYear(References.toTitleCase(t_anno.getText()));
+        tags.setTrack(References.toTitleCase(t_numero.getText()));
+        if (!cb_genere.getSelectedItem().toString().equals("Unknown")) {
+            tags.setGenreDescription((String)cb_genere.getSelectedItem());
+        }
+        if (l_cover.getIcon() != null) {
+            tags.setAlbumImage(CoverArt.iconToByteArray(l_cover.getIcon()), "jpg");
+        }
+        song.setTrack_tags(tags);
         song.save();
+
         this.dispose();
 
     }//GEN-LAST:event_b_saveActionPerformed

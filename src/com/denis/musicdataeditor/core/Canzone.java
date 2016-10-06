@@ -5,9 +5,10 @@ import com.denis.musicdataeditor.config.References;
 import com.denis.musicdataeditor.image.CoverArt;
 import com.mpatric.mp3agic.*;
 
-
+import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,6 +41,7 @@ public class Canzone extends Mp3File{
     }
 
     public Mp3File  getSONGFILE()       {return song;}
+    public void     setTrack_tags(ID3v2 tags) {track_tags = tags;}
     public ID3v2    getTrack_tags()     {return track_tags;}
     public void     refreshTrack_tags() {track_tags = this.song.getId3v2Tag();}
 
@@ -98,6 +100,7 @@ public class Canzone extends Mp3File{
             this.song.save(new_temp_path);
             System.out.println("Saved as: " + new File(new_temp_path).getName());
         } catch (IOException | NotSupportedException ex) {
+            JOptionPane.showMessageDialog(null, "pls select a genre!");
             Logger.getLogger(Canzone.class.getName()).log(Level.SEVERE, null, ex);
         }
         // cancella il file della vecchia canzone per far si che la nuova canzone possa anche avere il nome della versione

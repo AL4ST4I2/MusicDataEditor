@@ -2,9 +2,13 @@ package com.denis.musicdataeditor.image;
 
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -34,24 +38,17 @@ public class CoverArt {
 
     }
 
-    public static byte[] imageToByteArray(String url)
+    public static byte[] iconToByteArray(Icon icon)
     {
+        BufferedImage bufferedImage = new BufferedImage(icon.getIconWidth(),
+                                                        icon.getIconHeight(),
+                                                        BufferedImage.TYPE_INT_RGB);
 
-        URL imageUrl = null;
-        try {
-            imageUrl = new URL(url);
-        } catch (MalformedURLException e) {
-            System.err.printf("The url \"%s\" is not valid/unreachable: %s", url, e.getMessage());
-            return null;
-        }
-        BufferedImage bufferedImage = null;
-        try {
-            bufferedImage = ImageIO.read(imageUrl);
-        } catch (IOException e) {
-            System.err.printf("Couldn't set bufferedImage %s: %s",
-                    imageUrl.toExternalForm(), e.getMessage());
-            return null;
-        }
+        Graphics g = bufferedImage.createGraphics();
+        icon.paintIcon(null, g, 0, 0);
+        g.setColor(Color.WHITE);
+        g.dispose();
+
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
             ImageIO.write(bufferedImage, "jpg", baos);

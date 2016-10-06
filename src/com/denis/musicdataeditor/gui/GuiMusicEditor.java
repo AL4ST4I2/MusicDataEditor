@@ -1,9 +1,11 @@
 package com.denis.musicdataeditor.gui;
 
-import com.denis.musicdataeditor.core.Canzone;
 import com.denis.musicdataeditor.config.References;
+import com.denis.musicdataeditor.core.Canzone;
 import com.denis.musicdataeditor.core.SongList;
 import com.denis.musicdataeditor.image.CoverArt;
+import com.mpatric.mp3agic.ID3v2;
+import com.mpatric.mp3agic.ID3v23Tag;
 
 import javax.swing.*;
 import java.awt.*;
@@ -512,7 +514,7 @@ public class GuiMusicEditor extends javax.swing.JFrame {
     }
 
     /**
-     *  @param component component to which will be added the new keybindings
+     * @param component component to which will be added the new keybindings
      * @param condition its an int that rapresents JComponet. WHEN_FOCUSED
      * @param key key KeyEvent -> KeyEvent:VK_*desired key*
      * @param modifier mask modifier(shift, ctrl, alt etc) -> InputEvent.*and then the mask*. 0 (zero) if none
@@ -581,25 +583,35 @@ public class GuiMusicEditor extends javax.swing.JFrame {
         if(jList1.getSelectedIndices().length == 0) return;
         String testString = "MULTIPLE SELECTION";
         for (Canzone song : jList1.getSelectedValuesList()) {
+
+            ID3v2 tags = new ID3v23Tag();
             if (!t_TITOLO.getText().trim().equals(testString)) {
-                song.setTITOLO(References.toTitleCase(t_TITOLO.getText().trim()));
+                tags.setTitle(References.toTitleCase(t_TITOLO.getText().trim()));
             }
             if (!t_ARTISTA.getText().trim().equals(testString)) {
-                song.setARTISTA(References.toTitleCase(t_ARTISTA.getText().trim()));
+                tags.setArtist(References.toTitleCase(t_ARTISTA.getText().trim()));
             }
             if (!t_AUTORE.getText().trim().equals(testString)) {
-                song.setAUTORE(References.toTitleCase(t_AUTORE.getText().trim()));
+                tags.setAlbumArtist(References.toTitleCase(t_AUTORE.getText().trim()));
             }
             if (!t_ALBUM.getText().trim().equals(testString)) {
-                song.setALBUM(References.toTitleCase(t_ALBUM.getText().trim()));
+                tags.setAlbum(References.toTitleCase(t_ALBUM.getText().trim()));
             }
             if (!t_ANNO.getText().trim().equals(testString)) {
-                song.setANNO(References.toTitleCase(t_ANNO.getText().trim()));
+                tags.setYear(References.toTitleCase(t_ANNO.getText().trim()));
             }
             if (!t_NUMERO.getText().trim().equals(testString)) {
-                song.setNUMERO(References.toTitleCase(t_NUMERO.getText().trim()));
+                tags.setTrack(References.toTitleCase(t_NUMERO.getText().trim()));
             }
-            song.setGENERE(t_GENERE.getSelectedItem().toString());
+
+            if (t_GENERE.getSelectedItem() != null)
+                tags.setGenreDescription(t_GENERE.getSelectedItem().toString());
+
+            if (song.getCOVER() != null) {
+                tags.setAlbumImage(song.getCOVER(), "jpg");
+            }
+
+            song.setTrack_tags(tags);
             song.save();
         }
         track_list.updateTrackList();
@@ -797,7 +809,6 @@ public class GuiMusicEditor extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_b_cercaActionPerformed
-   
     /* Qui ci sono un di fancy cheats e shortcuts alle varie textfields e altre componenti */
     // <editor-fold defaultstate="collapsed" desc="Mouse button3 bindings">
     private void t_TITOLOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_TITOLOMouseClicked
@@ -871,16 +882,8 @@ public class GuiMusicEditor extends javax.swing.JFrame {
     }//GEN-LAST:event_b_dirActionPerformed
 
     // </editor-fold>
-   
-    
+
     //// ************* G E T T E R S & S E T T E R S ************* ////
-    public JTextField getT_ALBUM() {return t_ALBUM;}
-    public JTextField getT_TITOLO() {return t_TITOLO;}
-    public JTextField getT_NUMERO() {return t_NUMERO;}
-    public JComboBox<String> getT_GENERE() {return t_GENERE;}
-    public JTextField getT_AUTORE() {return t_AUTORE;}
-    public JTextField getT_ARTISTA() {return t_ARTISTA;}
-    public JTextField getT_ANNO() {return t_ANNO;}
     public SongList getTrack_list() {return this.track_list;}
 
     public void setTxt_t_TITOLO(String newString){t_TITOLO.setText(newString);}

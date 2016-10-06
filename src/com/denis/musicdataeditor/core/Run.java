@@ -1,8 +1,8 @@
 package com.denis.musicdataeditor.core;
+
 import com.denis.musicdataeditor.config.References;
 import com.denis.musicdataeditor.config.Setup;
 import com.denis.musicdataeditor.gui.GuiMusicEditor;
-import com.sun.org.apache.regexp.internal.RE;
 import org.jmusixmatch.MusixMatchException;
 
 import javax.swing.*;
@@ -23,8 +23,6 @@ public class Run {
         References.setLibDir();
         References.setFilterSearch();
 
-        System.out.println(References.LIB_DIR);
-        System.out.println(References.FILTER_SEARCH);
         SwingUtilities.invokeLater(() -> new GuiMusicEditor().setVisible(true));
     }
 

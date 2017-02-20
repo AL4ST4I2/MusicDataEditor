@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class ConfigPOJO
 {
-    //@SerializedName("mxm_api_key")
+    @SerializedName("mxm_api_key")
     private String mxm_api_key;
 
-    //@SerializedName("lib_dir")
+    @SerializedName("lib_dir")
     private String lib_dir;
 
-    //@SerializedName("filter_search")
+    @SerializedName("filter_search")
     private int filter_search;
 
     public String getMxm_api_key()

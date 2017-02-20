@@ -3,7 +3,8 @@ package com.denis.musicdataeditor.core;
 import com.denis.musicdataeditor.config.References;
 import com.denis.musicdataeditor.config.Setup;
 import com.denis.musicdataeditor.gui.GuiMusicEditor;
-import org.jmusixmatch.MusixMatchException;
+import com.myjmxm.core.MusixMatchException;
+
 
 import javax.swing.*;
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class Run {
 
     public static void main(String[] args)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
-            NoSuchFieldException, MusixMatchException, IOException
+                   NoSuchFieldException, MusixMatchException, IOException
     {
         setLookAndFeel("Windows");
         new Setup();

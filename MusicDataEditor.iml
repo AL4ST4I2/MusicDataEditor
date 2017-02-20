@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../output/MusicDataEditor/out/production/MusicDataEditor" />
-    <output-test url="file://$MODULE_DIR$/../output/MusicDataEditor/out/test/MusicDataEditor" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/res" type="java-resource" />
-      <excludeFolder url="file://$MODULE_DIR$/libs" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.google.code.gson:gson:2.7" level="project" />
-    <orderEntry type="library" name="com.mpatric:mp3agic:0.8.4" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jMusixMatchRevised.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/MyJMXM.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="com.mpatric:mp3agic:0.8.4" level="project" />
   </component>
 </module>

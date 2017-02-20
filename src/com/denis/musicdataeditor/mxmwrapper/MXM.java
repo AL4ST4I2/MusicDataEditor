@@ -2,12 +2,13 @@ package com.denis.musicdataeditor.mxmwrapper;
 
 
 import com.denis.musicdataeditor.config.References;
-import org.jmusixmatch.MusixMatch;
-import org.jmusixmatch.MusixMatchException;
-import org.jmusixmatch.entity.album.Album;
-import org.jmusixmatch.entity.album.AlbumData;
-import org.jmusixmatch.entity.artist.Artist;
-import org.jmusixmatch.entity.track.Track;
+import com.myjmxm.core.MusixMatch;
+import com.myjmxm.core.MusixMatchException;
+import com.myjmxm.entity.album.Album;
+import com.myjmxm.entity.artist.Artist;
+import com.myjmxm.entity.track.Track;
+import com.myjmxm.entity.track.TrackList;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,17 +26,16 @@ public class MXM
 
     public static List<MXMTrack> searchTrack(String q_artist, String q_title)
     {
-        List<MXMTrack> ret = new ArrayList<>();
-        List<Track> results;
+        List<MXMTrack>  ret = new ArrayList<>();
+        List<TrackList> results;
         try {
-            // TODO: il 10 va settatto nei confing situazionalmente per per non ottener troppi hits ai server
             results = mxms.mxm.searchTracks("", q_artist, q_title, 1, References.FILTER_SEARCH, false);
         } catch (MusixMatchException e) {
             e.printStackTrace();
             return null;
         }
 
-        results.forEach(t -> ret.add(new MXMTrack(t)));
+        results.forEach(t -> ret.add(new MXMTrack(t.getTrack())));
 
         return ret;
     }
@@ -86,9 +86,9 @@ public class MXM
         return artist;
     }
 
-    public static List<Track> getAlbumTrackList(AlbumData album)
+    public static List<TrackList> getAlbumTrackList(Album album)
     {
-        List<Track> tracks = null;
+        List<TrackList> tracks = null;
 
         try {
             tracks = mxms.mxm.getAlbumTrackList(album.getId(), 1, album.getTrackCount(), false);

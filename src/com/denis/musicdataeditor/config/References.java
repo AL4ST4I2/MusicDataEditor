@@ -8,9 +8,7 @@ import com.mpatric.mp3agic.ID3v1Genres;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
 
 public class References {
@@ -20,7 +18,9 @@ public class References {
     public static int    FILTER_SEARCH;
 
     public static final String USERHOME    = System.getProperty("user.home").replace("\\", "/") + "/";
-    public static final String CONFIG_HOME = USERHOME + "AppData/Roaming/MudicDataEditor";
+    public static final String CONFIG_HOME =
+                                OS.getOS() == OS.WIN ?
+                                    USERHOME + "AppData/Roaming/MusicDataEditor" : USERHOME + "Music/MusicDataEditor/config";
     public static final String CONFIG      = CONFIG_HOME + "/config.json";
 
     public final static String RES_DIR   = System.getProperty("user.dir").replace('\\', '/') + "/res/";
@@ -144,5 +144,17 @@ public class References {
             rit[i] = track.getGenres().get(i).getGenreName();
         }
         return rit;
+    }
+    
+    public static enum OS {
+        WIN, LINUX, MAC, NULL;
+        
+        public static OS getOS(){
+            String so = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
+            if (so.indexOf("mac") >= 0 || so.indexOf("darwin") >= 0) return OS.MAC;
+            else if (so.indexOf("win") >= 0) return OS.WIN;
+            else if (so.indexOf("nux") >= 0) return OS.LINUX;
+            return OS.NULL;
+        }
     }
 }

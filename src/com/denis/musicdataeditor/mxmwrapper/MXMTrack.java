@@ -1,15 +1,17 @@
 package com.denis.musicdataeditor.mxmwrapper;
 
 
-import org.jmusixmatch.entity.album.AlbumData;
-import org.jmusixmatch.entity.artist.ArtistData;
-import org.jmusixmatch.entity.genre.MusicGenre;
-import org.jmusixmatch.entity.genre.MusicGenreList;
-import org.jmusixmatch.entity.track.Track;
-import org.jmusixmatch.entity.track.TrackData;
-import org.jmusixmatch.entity.translation.ArtistNameTranslationList;
-import org.jmusixmatch.entity.translation.TrackNameTranslationList;
-import org.jmusixmatch.entity.translation.Translation;
+
+
+import com.myjmxm.entity.album.Album;
+import com.myjmxm.entity.artist.Artist;
+import com.myjmxm.entity.genre.MusicGenre;
+import com.myjmxm.entity.genre.MusicGenreList;
+import com.myjmxm.entity.track.Track;
+import com.myjmxm.entity.track.TrackList;
+import com.myjmxm.entity.translation.ArtistNameTranslationList;
+import com.myjmxm.entity.translation.TrackNameTranslationList;
+import com.myjmxm.entity.translation.Translation;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,15 +22,16 @@ public class MXMTrack {
 
     public MXMTrack(Track traccia)
     {
-        TrackData track     = traccia.getTrack();
-        AlbumData album     = MXM.getAlbum(track.getAlbumId()).getAlbum();
-        ArtistData artist   = MXM.getArtist(track.getArtistId()).getArtist();
+        Track  track  = traccia;
+        Album  album  = MXM.getAlbum(track.getAlbumId());
+        Artist artist = MXM.getArtist(track.getArtistId());
 
-        title               = track.getName();
-        trackID             = track.getId();
+        title               = track.getTrackName();
+        trackID             = track.getTrackId();
         titleTranslations   = takeTitleTranslations(track);
         releaseDate         = album.getReleaseDate();
-        coverart350x350     = immToURL(track.getCoverart350x350());
+        coverart350x350     = immToURL(track.getAlbumCoverart350x350());
+        coverart100x100     = immToURL(track.getAlbumCoverart100x100());
         albumCover350x350   = immToURL(album.getCoverart350x350());
 
         this.artist         = track.getArtistName();
@@ -45,15 +48,15 @@ public class MXMTrack {
         this.trackNumber    = retrieveTrackNumber(album);
     }
 
-    private int retrieveTrackNumber(AlbumData album)  {
-        List<Track> tl = MXM.getAlbumTrackList(album);
+    private int retrieveTrackNumber(Album album)  {
+        List<TrackList> tl = MXM.getAlbumTrackList(album);
 
         if (tl == null) {
             return -1;
         }
-        for (Track track : tl) {
-            if (track.getTrack().getId() == trackID &&
-                    track.getTrack().getName().equals(title))
+        for (TrackList track : tl) {
+            if (track.getTrack().getTrackId() == trackID &&
+                    track.getTrack().getTrackName().equals(title))
             {
                 return tl.indexOf(track) + 1;
             }
@@ -61,8 +64,8 @@ public class MXMTrack {
         return -1;
     }
 
-    private ArrayList<Translation> takeTitleTranslations(TrackData track) {
-        ArrayList<Translation> ritorno = new ArrayList<>();
+    private ArrayList<Translation> takeTitleTranslations(Track track) {
+        ArrayList<Translation>         ritorno         = new ArrayList<>();
         List<TrackNameTranslationList> translationList = track.getTranslationNameList();
 
         //System.out.println("DEBUG PURPOSE ONLY: SIZE OF TRACK NAME TRANSLATION LIST = " + translationList.size());
@@ -72,8 +75,8 @@ public class MXMTrack {
 
         return ritorno;
     }
-    private ArrayList<Translation> takeArtistTransalations(ArtistData artist) {
-        ArrayList<Translation> ritorno = new ArrayList<>();
+    private ArrayList<Translation> takeArtistTransalations(Artist artist) {
+        ArrayList<Translation>          ritorno         = new ArrayList<>();
         List<ArtistNameTranslationList> translationList = artist.getTranslationNameList();
 
         //System.out.println("DEBUG PURPOSE ONLY: SIZE OF ARTIST NAME TRANSLATION LIST = " + translationList.size());
@@ -83,7 +86,7 @@ public class MXMTrack {
         return ritorno;
     }
 
-    private ArrayList<MusicGenre> takeGenreList(TrackData track){
+    private ArrayList<MusicGenre> takeGenreList(Track track){
         ArrayList<MusicGenre> ritorno = new ArrayList<>();
 
         List<MusicGenreList> list = track.getPrimaryGenres().getMusicGenreList();
@@ -114,6 +117,7 @@ public class MXMTrack {
     public String   getReleaseDate()        {return releaseDate;}
     public int      getTrackNumber()        {return trackNumber;}
     public URL      getCoverart350x350()    {return coverart350x350;}
+    public URL      getCoverart100x100()    {return coverart100x100;}
     public URL      getAlbumCover350x350()  {return albumCover350x350;}
 
     public String   getArtist()             {return artist;}
@@ -136,6 +140,7 @@ public class MXMTrack {
     private String                  releaseDate;
     private int                     trackNumber;
     private URL                     coverart350x350;
+    private URL                     coverart100x100;
     private URL                     albumCover350x350;
     private ArrayList<Translation>  titleTranslations;
 

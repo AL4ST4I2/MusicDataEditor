@@ -173,6 +173,7 @@ public class MXMDialog extends javax.swing.JDialog {
                 l_logoMXMMouseClicked(evt);
             }
         });
+        
 
         jLabel10.setText("Powered By: MusixMatch");
 
@@ -462,6 +463,10 @@ public class MXMDialog extends javax.swing.JDialog {
 
             if (t.getCoverart350x350() != null) {
                 l_cover.setIcon(new ImageIcon(t.getCoverart350x350()));
+            } else if (t.getCoverart100x100() != null) {
+                // questo blocco else if è stato aggiunto in seguito, è da controllare, ma basicamente serve
+                // a far si che trovi una cover 100px qualora non abbia una 350px
+                l_cover.setIcon(new ImageIcon(t.getCoverart100x100()));
             } else {
                 l_cover.setIcon(null);
                 l_cover.setText("No Track Cover Found :(");
